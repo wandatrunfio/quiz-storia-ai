@@ -1,6 +1,6 @@
-# Quiz: come funziona l’IA
+# Quiz: la storia dell’IA
 
-Dati, addestramento, token e probabilità: 15 domande su come funziona l’IA e da dove nascono i suoi errori.
+Da Turing a ChatGPT: 15 domande sulle tappe che hanno portato all’intelligenza artificiale di oggi.
 
 Quiz interattivo del *Corso per formatori sull’uso dell’IA a scuola*, a cura di Wanda Trunfio.
 Le domande e le risposte compaiono in ordine casuale; dopo ogni risposta il quiz mostra la spiegazione e la fonte.
@@ -10,10 +10,10 @@ Il sito è composto da `index.html` e dal logo `logo.png`, senza dipendenze da i
 
 ## Pubblicarlo con GitHub Pages
 
-1. Crea un nuovo repository su GitHub, ad esempio `quiz-funzionamento-ia`, e carica `index.html`, `logo.png` e `README.md` (Add file › Upload files).
+1. Crea un nuovo repository su GitHub, ad esempio `quiz-storia-ia`, e carica `index.html`, `logo.png` e `README.md` (Add file › Upload files).
 2. Vai in **Settings › Pages**.
 3. In **Build and deployment** scegli *Deploy from a branch*, il branch `main` e la cartella `/ (root)`, poi **Save**.
-4. Dopo uno o due minuti il quiz è online all’indirizzo `https://<tuo-utente>.github.io/quiz-funzionamento-ia/`.
+4. Dopo uno o due minuti il quiz è online all’indirizzo `https://<tuo-utente>.github.io/quiz-storia-ia/`.
 
 ## Modificare le domande
 
