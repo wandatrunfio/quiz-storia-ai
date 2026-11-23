@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Dati, addestramento, token e probabilità: 15 domande su come funziona l’IA e da dove nascono i suoi errori.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz: come funziona l’IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Domine:wght@500;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<style>
+/* Una carta di quiz al centro di una fascia scura: una domanda alla volta, spiegazione subito dopo. */
+:root { --ink:#221A45; --paper:#F7F5FB; --paper-2:#EEEAF7; --card:#FDFCFF; --violet:#5A3EA6; --amber:#F2C14E; --body:#4A4463; --soft:#D9D3EE; --ok:#2E7D5B; --ko:#B23A48;
+  --display:'Domine', Georgia, serif; --text:'Nunito Sans','Segoe UI',Verdana,sans-serif; color-scheme: light; }
+* { box-sizing: border-box; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+html, body { margin: 0; min-height: 100%; }
+body { background: var(--ink); color: var(--soft); font-family: var(--text); font-size: 18px; line-height: 1.55; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 56px; }
+.eyebrow { font-size: 13px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--amber); margin: 0; }
+h1 { font-family: var(--display); color: var(--paper); font-size: clamp(30px, 5vw, 44px); line-height: 1.15; margin: 10px 0 10px; text-wrap: balance; }
+.sub { margin: 0 0 28px; }
+.card { background: var(--card); color: var(--body); border-radius: 24px; padding: 28px; display: grid; gap: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
+.qtop { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+.progress { height: 8px; background: var(--paper-2); border-radius: 999px; overflow: hidden; }
+.progress i { display: block; height: 100%; background: var(--amber); transition: width .3s ease; }
+.qtext { font-family: var(--display); font-size: 24px; color: var(--ink); line-height: 1.35; margin: 0; text-wrap: balance; }
+.opts { display: grid; gap: 10px; }
+.opt { text-align: left; font: 600 17px var(--text); color: var(--ink); background: var(--paper); border: 2px solid var(--soft); border-radius: 14px; padding: 14px 16px; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; }
+.opt:hover:not(:disabled) { border-color: var(--violet); }
+.opt .l { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--card); border: 2px solid var(--soft); display: grid; place-items: center; font-weight: 800; font-size: 14px; }
+.opt.right { border-color: var(--ok); background: #E6F3EC; } .opt.wrong { border-color: var(--ko); background: #F8E6E8; }
+.opt:disabled { cursor: default; }
+.feedback { border-radius: 14px; padding: 14px 16px; background: var(--paper-2); margin: 0; }
+.feedback b.ok { color: var(--ok); } .feedback b.ko { color: var(--ko); }
+.src { display: block; margin-top: 6px; font-size: 14px; opacity: .85; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { font: 800 16px var(--text); border-radius: 999px; padding: 12px 22px; border: 2px solid transparent; cursor: pointer; }
+.btn.primary { background: var(--amber); color: var(--ink); } .btn.dark { background: var(--violet); color: var(--paper); } .btn.line { background: transparent; border-color: var(--violet); color: var(--violet); }
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+.score { font-family: var(--display); font-size: 64px; color: var(--violet); line-height: 1; margin: 0; font-variant-numeric: tabular-nums; }
+.review { display: grid; gap: 8px; }
+.review div { font-size: 15px; padding: 8px 12px; border-radius: 10px; background: var(--paper); }
+.review div.k { border-left: 5px solid var(--ko); } .review div.o { border-left: 5px solid var(--ok); }
+.review small { display: block; opacity: .85; }
+.copied { font-size: 14px; color: var(--ok); font-weight: 700; align-self: center; }
+.head { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.logo { width: 72px; height: 72px; border-radius: 50%; background: #FDFCFF; padding: 3px; flex: none; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+.byline { margin: 4px 0 0; font-weight: 700; color: var(--paper); font-size: 16px; }
+footer { margin-top: 28px; font-size: 14px; }
+p { margin: 0; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="head">
+    <img class="logo" src="logo.png" alt="Logo di Wanda Trunfio" width="72" height="72">
+    <div>
+      <p class="eyebrow">Corso per formatori sull’uso dell’IA a scuola</p>
+      <p class="byline">A cura di Wanda Trunfio</p>
+    </div>
+  </header>
+  <h1>Quiz: come funziona l’IA</h1>
+  <p class="sub">Dati, addestramento, token e probabilità: 15 domande su come funziona l’IA e da dove nascono i suoi errori.</p>
+  <div class="card" id="card" aria-live="polite"></div>
+  <footer>Le domande arrivano in ordine casuale; dopo ogni risposta trovi spiegazione e fonte.</footer>
+</main>
+<script>
+(function () {
+  'use strict';
+  const Q = [["Che cosa cambia tra programmazione tradizionale e machine learning?", ["Nel machine learning la macchina ricava le regole dagli esempi", "Il machine learning non usa dati", "Nella programmazione tradizionale non ci sono regole", "Nessuna differenza"], 0, "Tradizionale: regole + dati → risposte. Machine learning: dati + risposte → regole, cioè il modello.", "Lezione 1; Rosenblatt 1958"], ["Che cos’è l’apprendimento supervisionato?", ["Un docente controlla il computer", "Imparare da esempi con l’etichetta giusta", "Imparare senza alcun dato", "Copiare le risposte da Internet"], 1, "Il sistema vede esempi già etichettati, come «spam» o «non spam», e impara a etichettare quelli nuovi.", "Lezione 1"], ["Come funziona l’apprendimento per rinforzo?", ["Prova, sbaglia e riceve una «ricompensa»", "Legge un manuale di istruzioni", "Copia un esperto umano", "Ripete sempre la stessa azione"], 0, "È il metodo con cui AlphaGo ha migliorato il suo gioco, sfidando versioni di sé stesso.", "Google DeepMind, «AlphaGo»"], ["Che cosa significa «deep» in deep learning?", ["Che la macchina pensa in profondità", "Che usa reti neurali con molti strati", "Che lavora sott’acqua", "Che usa pochi dati"], 1, "Le reti profonde hanno molti strati di calcoli e servono enormi quantità di dati per addestrarle.", "Krizhevsky et al., 2012"], ["Che cos’è un token?", ["Una password", "Un pezzo di testo, parola o parte di parola", "Un’unità di energia", "Una regola scritta"], 1, "Il modello spezza il testo in token e li trasforma in numeri: non «vede» le parole come noi.", "Vaswani et al., 2017"], ["Come genera una risposta un modello linguistico?", ["Copia da un archivio di risposte giuste", "Sceglie un token alla volta, tra i più probabili", "Chiede a un esperto umano", "Cerca sempre su Google"], 1, "È un autocompletamento potentissimo: scrive in modo fluente, ma la probabilità non è la verità.", "Ouyang et al., 2022"], ["Perché la stessa domanda può dare risposte diverse?", ["Il modello si stanca", "C’è una componente casuale nella scelta dei token", "Qualcuno corregge in diretta", "Il modello dimentica tutto"], 1, "Il modello non sceglie sempre la parola più probabile: per questo è vario, ma meno prevedibile.", "NIST AI 600-1, 2024"], ["Che cosa impara il modello nel pre-addestramento?", ["A prevedere la parola successiva su enormi quantità di testi", "A verificare i fatti", "A rispettare la legge", "A calcolare con precisione"], 0, "È la prima fase: il modello assorbe gli schemi della lingua da miliardi di parole.", "Ouyang et al., NeurIPS 2022"], ["A che cosa serve il feedback umano (RLHF)?", ["A verificare ogni fatto", "A far imparare le risposte che le persone preferiscono", "A tradurre il modello", "A ridurre i consumi"], 1, "Persone confrontano più risposte: il modello diventa più utile, ma impara ciò che piace, non ciò che è vero.", "Ouyang et al., NeurIPS 2022"], ["Che cosa significa «garbage in, garbage out»?", ["Che l’IA ricicla i dati", "Che con dati di cattiva qualità si ottengono risultati cattivi", "Che l’IA cancella i dati vecchi", "Che i dati non contano"], 1, "I dati sono il libro di testo della macchina: parziali, stereotipati o vecchi producono risposte con gli stessi difetti.", "Lezione 1"], ["Perché un chatbot può sbagliare un calcolo?", ["Perché prevede le cifre come token, invece di calcolarle", "Perché non conosce i numeri", "Perché è programmato per sbagliare", "Perché il computer è lento"], 0, "Senza uno strumento di calcolo, le moltiplicazioni lunghe sono difficili: un errore in un passaggio si propaga.", "Studi su aritmetica e tokenizzazione, 2024–2026"], ["Perché un modello può dare informazioni datate?", ["Perché conosce solo i testi fino alla data dell’addestramento", "Perché preferisce il passato", "Perché le informazioni nuove sono false", "Perché è vietato aggiornarlo"], 0, "Dopo quella data non sa nulla, ma può rispondere come se sapesse: chiedere sempre la data e verificare.", "NIST AI 600-1, 2024"], ["Perché un chatbot può inventare libri o articoli inesistenti?", ["Perché copia da siti falsi", "Perché genera citazioni plausibili senza consultare un catalogo", "Perché è programmato per mentire", "Perché i libri sono protetti"], 1, "In uno studio del 2023 risultava inventato il 55% delle citazioni di GPT-3.5 e il 18% di quelle di GPT-4.", "Walters e Wilder, Scientific Reports, 2023"], ["Da dove nascono i bias di genere di un modello?", ["Da dati sbilanciati che riflettono gli stereotipi", "Da un errore di battitura", "Dal caso", "Dagli utenti che lo usano oggi"], 0, "Lo strumento di selezione di Amazon, addestrato su curriculum soprattutto maschili, penalizzava la parola «women’s».", "Reuters, 10 ottobre 2018"], ["Perché, secondo OpenAI (2025), le allucinazioni persistono?", ["Per un virus informatico", "Perché i test premiano chi tira a indovinare", "Perché i modelli sono troppo piccoli", "Perché leggono solo romanzi"], 1, "Come a un test a crocette: rispondere a caso conviene più che dire «non lo so», se l’errore non è penalizzato.", "Kalai et al., «Why Language Models Hallucinate», 2025"]];
+  const LET = ['A', 'B', 'C', 'D'];
+  const card = document.getElementById('card');
+  const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; };
+  const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+  let order = [], idx = 0, perm = [], answers = [], t0 = 0;
+  const fmt = ms => { const s = Math.round(ms / 1000); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+  function intro() {
+    card.innerHTML = '';
+    card.appendChild(el('p', 'eyebrow', Q.length + ' domande · circa ' + Math.round(Q.length * 0.4) + ' minuti'));
+    card.appendChild(el('p', 'qtext', 'Sai spiegare come impara e come «scrive» un’intelligenza artificiale?'));
+    card.appendChild(el('p', '', 'Rispondi a ogni domanda: vedrai subito se è giusta, perché, e la fonte. Alla fine puoi rivedere tutte le risposte e rifare il quiz.'));
+    const a = el('div', 'actions'); const b = el('button', 'btn dark', 'Inizia il quiz'); b.addEventListener('click', start); a.appendChild(b); card.appendChild(a);
+  }
+  function start() { order = shuffle(Q.map((_, i) => i)); idx = 0; answers = []; t0 = performance.now(); show(); }
+  function show() {
+    const q = Q[order[idx]]; card.innerHTML = '';
+    const top = el('div', 'qtop'); top.appendChild(el('span', '', 'Domanda ' + (idx + 1) + ' di ' + Q.length)); const ok = el('span', '', 'Esatte: ' + answers.filter(a => a.ok).length); top.appendChild(ok); card.appendChild(top);
+    const pr = el('div', 'progress'); const bar = el('i'); bar.style.width = (idx / Q.length * 100) + '%'; pr.appendChild(bar); card.appendChild(pr);
+    card.appendChild(el('p', 'qtext', q[0]));
+    const opts = el('div', 'opts'); opts.setAttribute('role', 'group'); opts.setAttribute('aria-label', 'Risposte');
+    perm = shuffle(q[1].map((_, i) => i));
+    perm.forEach((oi, pos) => { const b = el('button', 'opt'); b.appendChild(el('span', 'l', LET[pos])); b.appendChild(el('span', '', q[1][oi])); b.addEventListener('click', () => answer(oi, ok)); opts.appendChild(b); });
+    card.appendChild(opts); opts.querySelector('button').focus({ preventScroll: true });
+  }
+  function answer(i, okEl) {
+    const q = Q[order[idx]]; const ok = i === q[2]; answers.push({ q: order[idx], ok });
+    card.querySelectorAll('.opt').forEach((b, pos) => { const j = perm[pos]; b.disabled = true; if (j === q[2]) b.classList.add('right'); else if (j === i) b.classList.add('wrong'); });
+    okEl.textContent = 'Esatte: ' + answers.filter(a => a.ok).length;
+    const fb = el('p', 'feedback'); fb.appendChild(el('b', ok ? 'ok' : 'ko', ok ? 'Esatto. ' : 'Non è così. ')); fb.appendChild(document.createTextNode(q[3])); fb.appendChild(el('span', 'src', 'Fonte: ' + q[4])); card.appendChild(fb);
+    const a = el('div', 'actions'); const nx = el('button', 'btn primary', idx + 1 < Q.length ? 'Domanda successiva' : 'Vedi il risultato');
+    nx.addEventListener('click', () => { idx++; if (idx < Q.length) show(); else finish(); }); a.appendChild(nx); card.appendChild(a); nx.focus({ preventScroll: true });
+  }
+  function finish() {
+    const ms = performance.now() - t0, s = answers.filter(a => a.ok).length; card.innerHTML = '';
+    card.appendChild(el('p', 'eyebrow', 'Il tuo risultato'));
+    card.appendChild(el('p', 'score', s + '/' + Q.length));
+    const pct = s / Q.length;
+    card.appendChild(el('p', '', 'Tempo: ' + fmt(ms) + '. ' + (pct >= 0.85 ? 'Ottimo: sei pronto a spiegarlo ai colleghi.' : pct >= 0.6 ? 'Buona base: rivedi le risposte sbagliate qui sotto.' : 'Conviene ripassare la presentazione e riprovare.')));
+    const a = el('div', 'actions'); const again = el('button', 'btn dark', 'Rifai il quiz'); again.addEventListener('click', start);
+    const cp = el('button', 'btn line', 'Copia il risultato'); const msg = el('span', 'copied', '');
+    cp.addEventListener('click', () => { const t = 'Quiz: come funziona l’IA: ' + s + '/' + Q.length + ' in ' + fmt(ms); try { navigator.clipboard.writeText(t).then(() => { msg.textContent = 'Copiato'; }, () => { msg.textContent = t; }); } catch (e) { msg.textContent = t; } });
+    a.append(again, cp, msg); card.appendChild(a);
+    card.appendChild(el('p', 'eyebrow', 'Rivedi le risposte'));
+    const rv = el('div', 'review');
+    answers.forEach(x => { const q = Q[x.q]; const d = el('div', x.ok ? 'o' : 'k'); d.appendChild(document.createTextNode((x.ok ? '✓ ' : '✗ ') + q[0] + ' → ' + q[1][q[2]])); d.appendChild(el('small', '', q[3])); rv.appendChild(d); });
+    card.appendChild(rv);
+  }
+  intro();
+})();
+</script>
+</body>
+</html>
